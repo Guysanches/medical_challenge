@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49474906936",
+    "project_id": "medicalcrud-bb020",
+    "storage_bucket": "medicalcrud-bb020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49474906936:android:246c932664a9849fae6fcd",
+        "android_client_info": {
+          "package_name": "com.example.medical_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49474906936-je3umeg8h62alvj0b52p4icqbs8ehsu2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdV4-W87UmKPcq0-i8uhTuAgPq-AzuE8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49474906936-je3umeg8h62alvj0b52p4icqbs8ehsu2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
