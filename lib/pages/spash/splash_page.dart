@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:medical_challenge/core/core.dart';
-import 'package:medical_challenge/pages/home/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -12,8 +11,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new HomePage()));
+      Navigator.of(context).pushNamed('/home');
     });
     super.initState();
   }
@@ -29,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(
+              SvgPicture.asset(
                 AppImages.logo,
                 width: 128,
                 height: 128,

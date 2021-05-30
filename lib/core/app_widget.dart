@@ -17,7 +17,7 @@ class AppWidget extends StatelessWidget {
           ),
         ),
         title: "Medical Challenge",
-        routes: AppRoutes.cRoutes,
+        onGenerateRoute: AppRoutes.generateRoute,
         initialRoute: AppRoutes.cInitialRoute);
   }
 }

@@ -1,69 +1,49 @@
 import 'dart:convert';
 
-class DoctorModel {
-  final String uId;
-  final String address;
-  final num amount;
-  final String crm;
-  final String name;
-  final String phone;
+import 'package:medical_challenge/shared/models/doctor_details_model.dart';
 
-  DoctorModel({
-    required this.uId,
-    required this.address,
-    required this.amount,
-    required this.crm,
-    required this.name,
-    required this.phone,
-  });
+class Doctor {
+  String uid;
+  Doctor({required this.uid, required this.doctorDetails});
+  DoctorDetails doctorDetails;
 
-  DoctorModel copyWith({
-    String? uId,
-    String? address,
-    num? amount,
-    String? crm,
-    String? name,
-    String? phone,
+  Doctor copyWith({
+    String? uid,
+    DoctorDetails? doctorDetails,
   }) {
-    return DoctorModel(
-      uId: uId ?? this.uId,
-      address: address ?? this.address,
-      amount: amount ?? this.amount,
-      crm: crm ?? this.crm,
-      name: name ?? this.name,
-      phone: phone ?? this.phone,
-    );
+    return Doctor(
+        uid: uid ?? this.uid,
+        doctorDetails: doctorDetails ?? this.doctorDetails);
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'uId': uId,
-      'address': address,
-      'amount': amount,
-      'crm': crm,
-      'name': name,
-      'phone': phone,
+      'uid': uid,
+      'doctorDetails': doctorDetails.toJson(),
     };
   }
 
-  factory DoctorModel.fromMap(Map<String, dynamic> map) {
-    return DoctorModel(
-      uId: map['uId'],
-      address: map['address'],
-      amount: map['amount'],
-      crm: map['crm'],
-      name: map['name'],
-      phone: map['phone'],
+  factory Doctor.fromMap(Map<String, dynamic> map) {
+    return Doctor(
+      uid: map['uid'],
+      doctorDetails: DoctorDetails.fromMap(map['doctorDetails']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DoctorModel.fromJson(String source) =>
-      DoctorModel.fromMap(json.decode(source));
+  factory Doctor.fromJson(String source) => Doctor.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'DoctorModel(uId: $uId, address: $address, amount: $amount, crm: $crm, name: $name, phone: $phone)';
+  String toString() => 'Doctor(uid: $uid)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Doctor && other.uid == uid;
   }
+
+  @override
+  int get hashCode => uid.hashCode;
 }

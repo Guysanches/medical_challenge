@@ -4,11 +4,30 @@ import 'package:medical_challenge/pages/home/home_page.dart';
 import 'package:medical_challenge/pages/spash/splash_page.dart';
 
 class AppRoutes {
-  static String cInitialRoute = '/';
+  static final cInitialRoute = '/';
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    //final args = settings.arguments;
 
-  static Map<String, Widget Function(BuildContext context)> cRoutes = {
-    '/': (context) => SplashPage(),
-    '/Home': (context) => HomePage(),
-    '/Doctors': (context) => DoctorPage()
-  };
+    switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(builder: (context) => SplashPage());
+      case '/home':
+        return MaterialPageRoute(builder: (context) => HomePage());
+      case '/doctor':
+        return MaterialPageRoute(builder: (context) => DoctorPage());
+      default:
+        return MaterialPageRoute(builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Center(
+                child: Text('Error Access Page'),
+              ),
+            ),
+            body: Center(
+              child: Text('Page not found'),
+            ),
+          );
+        });
+    }
+  }
 }
