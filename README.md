@@ -1,16 +1,45 @@
-# medical_challenge
+---
+   Mobille Challenge
+---
 
-A new Flutter project.
+<h2 align="center">Funcionalidades</h2>
 
-## Getting Started
+   <p>
+   
+- Menu Principal: 
+    - Medicos:
+        - Listagem de Medicos:
+            - Cadastro 
+            - Edição 
+            - Exclusão
+            - Mais Info 
 
-This project is a starting point for a Flutter application.
+   </p>
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<h2 align="center">Como Usar</h2>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   <p>
+     Em primeiro lugar, configure corretamente o ambiente de desenvolvimento Flutter em sua máquina, para isso acesse o link abaixo:
+
+   - <a href="https://flutter.dev/docs/get-started/install">Flutter Install</a>   
+   
+   </p>
+
+
+   ```     
+   - Clone este repositório:
+   $ git clone https://github.com/Guysanches/medical_challenge
+
+   - Entre no diretório:
+   $ cd medical_challenge
+
+   - Use o comando para instalar dependências:
+   $ flutter pub get
+
+   - Execute o aplicativo: 
+   $ flutter run
+   ```
+
+---
