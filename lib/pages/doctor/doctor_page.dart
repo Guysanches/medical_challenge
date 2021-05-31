@@ -15,7 +15,6 @@ class _DoctorPageState extends State<DoctorPage> {
 
   @override
   void initState() {
-    // if (cData.cStatusList != StatusList.error) cData.getItems();
     cData.getItems();
     super.initState();
   }
@@ -26,9 +25,13 @@ class _DoctorPageState extends State<DoctorPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Doctors'),
+          backgroundColor: AppColors.cPrimaryGradientColor,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            await Navigator.of(context)
+                .pushNamed('/doctorform', arguments: FormArg(''));
+          },
           child: Icon(Icons.add),
           backgroundColor: AppColors.cBackGroundAddButton,
         ),

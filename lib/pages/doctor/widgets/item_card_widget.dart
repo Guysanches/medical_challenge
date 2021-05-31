@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:medical_challenge/core/core.dart';
 import 'package:medical_challenge/pages/doctor/widgets/item_options_widget.dart';
 import 'dart:math' as math;
 import 'package:medical_challenge/shared/models/doctor_model.dart';
+import 'package:medical_challenge/shared/stores/doctor_store.dart';
 
 class ItemCardWidget extends StatelessWidget {
-  final Doctor item;
+  final DoctorModel item;
 
   const ItemCardWidget({
     Key? key,
@@ -14,6 +16,8 @@ class ItemCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DoctorStore cData = GetIt.instance<DoctorStore>();
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
@@ -27,7 +31,7 @@ class ItemCardWidget extends StatelessWidget {
                   Container(
                     child: Center(
                         child: Text(
-                      item.doctorDetails.name[0].toUpperCase(),
+                      item.name[0].toUpperCase(),
                       style: AppTextStyles.cFirstCaracterTextStyle,
                     )),
                     height: 60,
@@ -44,20 +48,19 @@ class ItemCardWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.doctorDetails.name,
-                          style: AppTextStyles.cTitleTextstyle),
+                      Text(item.name, style: AppTextStyles.cTitleTextstyle),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "CRM:  ${item.doctorDetails.crm}",
+                            "CRM:  ${item.crm}",
                             style: AppTextStyles.cSubTextStyle,
                           ),
                           SizedBox(
                             width: 60,
                           ),
                           Text(
-                              "Valor: ${item.doctorDetails.amount.toStringAsFixed(2).replaceAll('.', ',')}",
+                              "Valor R\$: ${item.amount.toStringAsFixed(2).replaceAll('.', ',')}",
                               style: AppTextStyles.cSubTextStyle),
                         ],
                       )
@@ -72,19 +75,27 @@ class ItemCardWidget extends StatelessWidget {
                   children: [
                     ItemOptionsWidget(
                       color: Colors.amber,
-                      onTap: () {},
+                      onTap: () async {
+                        await Navigator.of(context).pushNamed('/doctorform',
+                            arguments: FormArg(item.id));
+                      },
                       title: 'Editar',
                     ),
                     SizedBox(width: 2),
                     ItemOptionsWidget(
                       color: Colors.red,
-                      onTap: () {},
+                      onTap: () async {
+                        await cData.delete(item);
+                      },
                       title: 'Excluir',
                     ),
                     SizedBox(width: 2),
                     ItemOptionsWidget(
                       color: Colors.blue,
-                      onTap: () {},
+                      onTap: () async {
+                        await Navigator.of(context).pushNamed('/doctordetails',
+                            arguments: Details(item));
+                      },
                       title: 'Info',
                     ),
                   ],

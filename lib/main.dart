@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:medical_challenge/pages/doctor_form/stores/doctor_form_store.dart';
 import 'package:medical_challenge/shared/stores/doctor_store.dart';
 import 'core/app_widget.dart';
 
@@ -9,5 +10,6 @@ void main() async {
   await Firebase.initializeApp();
   GetIt getIt = GetIt.instance;
   getIt.registerSingleton<DoctorStore>(DoctorStore());
+  getIt.registerSingleton<DoctorFormStore>(DoctorFormStore());
   runApp(AppWidget());
 }

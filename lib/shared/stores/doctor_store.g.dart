@@ -12,13 +12,13 @@ mixin _$DoctorStore on _DoctorStoreBase, Store {
   final _$cItemsAtom = Atom(name: '_DoctorStoreBase.cItems');
 
   @override
-  List<Doctor> get cItems {
+  List<DoctorModel> get cItems {
     _$cItemsAtom.reportRead();
     return super.cItems;
   }
 
   @override
-  set cItems(List<Doctor> value) {
+  set cItems(List<DoctorModel> value) {
     _$cItemsAtom.reportWrite(value, super.cItems, () {
       super.cItems = value;
     });
@@ -54,35 +54,24 @@ mixin _$DoctorStore on _DoctorStoreBase, Store {
     });
   }
 
+  final _$getDoctorAsyncAction = AsyncAction('_DoctorStoreBase.getDoctor');
+
+  @override
+  Future<DoctorModel> getDoctor(String id) {
+    return _$getDoctorAsyncAction.run(() => super.getDoctor(id));
+  }
+
   final _$getItemsAsyncAction = AsyncAction('_DoctorStoreBase.getItems');
 
   @override
-  Future<List<Doctor>> getItems() {
+  Future<dynamic> getItems() {
     return _$getItemsAsyncAction.run(() => super.getItems());
-  }
-
-  final _$createDoctorDataAsyncAction =
-      AsyncAction('_DoctorStoreBase.createDoctorData');
-
-  @override
-  Future<void> createDoctorData(Doctor doctor) {
-    return _$createDoctorDataAsyncAction
-        .run(() => super.createDoctorData(doctor));
-  }
-
-  final _$updateDoctorDataAsyncAction =
-      AsyncAction('_DoctorStoreBase.updateDoctorData');
-
-  @override
-  Future<void> updateDoctorData(Doctor doctor) {
-    return _$updateDoctorDataAsyncAction
-        .run(() => super.updateDoctorData(doctor));
   }
 
   final _$deleteAsyncAction = AsyncAction('_DoctorStoreBase.delete');
 
   @override
-  Future<void> delete(Doctor doctor) {
+  Future<dynamic> delete(DoctorModel doctor) {
     return _$deleteAsyncAction.run(() => super.delete(doctor));
   }
 

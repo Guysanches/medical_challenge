@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:medical_challenge/shared/models/doctor_details_model.dart';
 import 'package:medical_challenge/shared/models/doctor_model.dart';
 import 'package:mobx/mobx.dart';
 part 'doctor_store.g.dart';
@@ -13,7 +12,7 @@ abstract class _DoctorStoreBase with Store {
   final FirebaseFirestore cFirebase = FirebaseFirestore.instance;
 
   @observable
-  List<Doctor> cItems = [];
+  List<DoctorModel> cItems = [];
 
   @observable
   StatusList cStatusList = StatusList.initial;
@@ -22,25 +21,33 @@ abstract class _DoctorStoreBase with Store {
   String messageError = '';
 
   @action
-  Future<List<Doctor>> getItems() async {
+  Future<DoctorModel> getDoctor(String id) async {
+    return await cFirebase
+        .collection('doctors')
+        .doc(id)
+        .get()
+        .then((value) => DoctorModel.fromMap(value.id, value.data()!));
+  }
+
+  @action
+  Future getItems() async {
     cItems = [];
     try {
       cStatusList = StatusList.loading;
-      await Future.delayed(Duration(seconds: 3), () async {
-        await cFirebase.collection('doctors').get().then((value) {
-          value.docs.forEach((element) {
-            cItems.add(
-              Doctor.fromMap(
-                {
-                  "uid": element.id,
-                  "doctorDetails":
-                      new DoctorDetails.fromMap(element.data()).toMap(),
-                },
-              ),
-            );
-          });
-        });
-      });
+      await cFirebase.collection('doctors').get().then(
+        (value) {
+          value.docs.forEach(
+            (element) {
+              cItems.add(
+                DoctorModel.fromMap(
+                  element.id,
+                  element.data(),
+                ),
+              );
+            },
+          );
+        },
+      );
 
       if (cItems.isNotEmpty)
         cStatusList = StatusList.loaded;
@@ -56,23 +63,9 @@ abstract class _DoctorStoreBase with Store {
   }
 
   @action
-  Future<void> createDoctorData(Doctor doctor) async {
-    return await cFirebase
-        .collection('doctors')
-        .doc()
-        .set(doctor.doctorDetails.toMap());
-  }
+  Future delete(DoctorModel doctor) async {
+    await cFirebase.collection('doctors').doc(doctor.id).delete();
 
-  @action
-  Future<void> updateDoctorData(Doctor doctor) async {
-    return await cFirebase
-        .collection('doctors')
-        .doc(doctor.uid)
-        .update(doctor.doctorDetails.toMap());
-  }
-
-  @action
-  Future<void> delete(Doctor doctor) async {
-    return await cFirebase.collection('doctors').doc(doctor.uid).delete();
+    getItems();
   }
 }
